@@ -4,7 +4,8 @@ from gtts import gTTS
 from playsound import playsound
 import os
 import sys
-
+import so_funcoes
+import noticias_funcoes
 
 def cria_audio(audio, mensagem):
     tts = gTTS(mensagem, lang='pt-br')
@@ -16,6 +17,17 @@ def cria_audio(audio, mensagem):
 def executa_comandos(acao):
      if 'fechar assistente' in acao:
          sys.exit()
+     elif 'horas' in acao:
+         cria_audio('dados/mensagem.mp3', so_funcoes.verifica_hora())
+     elif 'desligar computador' in acao and 'uma hora' in acao:
+         so_funcoes.desliga_computador_uma_hora()
+     elif 'desligar computador' in acao and 'meia hora' in acao:
+         so_funcoes.desliga_computador_meia_hora()    
+     elif 'cancelar desligamento' in acao:
+         so_funcoes.cancela_desligamento()  
+     elif 'noticias' in acao:
+         cria_audio('dados/mensagem.mp3', noticias_funcoes.ultimas_noticias())
+        
 
 
 def monitora_audio():
